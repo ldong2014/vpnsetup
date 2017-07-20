@@ -32,7 +32,7 @@ if [ -z $SLAVE ]; then
 	SLAVE="NONE"
 fi
 
-if [ $SLAVE != "NONE" ] ; then
+if [ $SLAVE = "NONE" ] ; then
 	/usr/src/ethudp/EthUDP -e $OPT $IP $PORT $REMOTE $PORT eth1
 	/usr/src/ethudp/EthUDP -i $OPT $IP $PORT $REMOTE $MPORT $PREFIX$INDEX.2 24
 else
