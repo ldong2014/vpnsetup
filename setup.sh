@@ -1,7 +1,6 @@
 #!/bin/bash
 function active_config()
 {
-
 	VPNNAME=$(cat /etc/ethudp/SITE/VPNNAME)
 	INDEX=$(cat /etc/ethudp/SITE/INDEX)
 	BASEPORT=$(cat /etc/ethudp/SITE/BASEPORT)
@@ -16,9 +15,10 @@ function active_config()
 	
 	if [ $? -eq 0 ] 
 	then 
-		echo active;
+		/usr/src/vpnsetup/restart.sh
 	fi 
 }
+
 function read_slave()
 {
 	tempfile=`tempfile 2>/dev/null` || tempfile=/tmp/test$$
