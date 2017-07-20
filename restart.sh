@@ -9,7 +9,7 @@ MASK=$(cat /etc/ethudp/MASK)
 GATE=$(cat /etc/ethudp/GATE)
 MASTER=$(cat /etc/ethudp/MASTER)
 SLAVE=$(cat /etc/ethudp/SLAVE)
-PREFIX=$(cat /etc/ethudp/PREFIX)
+PREFIX=$(cat /etc/ethudp/SITE/PREFIX)
 
 killall -9 EthUDP
 ip link set eth0 up
