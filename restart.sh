@@ -24,14 +24,18 @@ if [ -z $MASTER ] ; then
 	MASTER="CT"
 fi
 
-
 REMOTE=$(cat /etc/ethudp/SITE/$MASTER)
 
 MPORT=`expr $PORT + 1000`
+
 if [ -z $SLAVE ]; then
+	SLAVE="NONE"
+fi
+
+if [ $SLAVE != "NONE" ] ; then
 	/usr/src/ethudp/EthUDP -e $OPT $IP $PORT $REMOTE $PORT eth1
 	/usr/src/ethudp/EthUDP -i $OPT $IP $PORT $REMOTE $MPORT $PREFIX$INDEX.2 24
-elif [ $SLAVE != "NONE" ] ; then
+else
 	REMOTE2=$(cat /etc/ethudp/$SLAVE)
 	PORT2=`expr $PORT + 100`
 	MPORT2=`expr $PORT2 + 1000`
