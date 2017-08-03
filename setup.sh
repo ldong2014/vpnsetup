@@ -2,6 +2,7 @@
 function active_config()
 {
 	VPNNAME=$(cat /etc/ethudp/SITE/VPNNAME)
+	HOSTNAME=$(cat /etc/ethudp/HOSTNAME)
 	INDEX=$(cat /etc/ethudp/SITE/INDEX)
 	BASEPORT=$(cat /etc/ethudp/SITE/BASEPORT)
 	PORT=`expr $BASEPORT + $INDEX`
@@ -112,10 +113,11 @@ function read_master()
 function read_ip_info()
 {
 	tempfile=`tempfile 2>/dev/null` || tempfile=/tmp/test$$
-	dialog --ok-label "Next"  --title "Internet Interface Setup" --form "Please input the Internet Interface info:" 12 50 3  \
-  		"IP:" 1  1 "$IP" 1  15  15  0  \
-  		"Mask:" 2  1 "$MASK" 2  15  15  0  \
-  		"Gateway:" 3  1 "$GATE" 3  15  15  0 \
+	dialog --ok-label "Next"  --title "Internet Interface Setup" --form "Please input the Internet Interface info:" 12 50 4  \
+  		"HOSTNAME:" 1  1 "$HOSTNAME" 1  15  15  0  \
+  		"IP:" 2  1 "$IP" 2  15  15  0  \
+  		"Mask:" 3  1 "$MASK" 3  15  15  0  \
+  		"Gateway:" 4  1 "$GATE" 4  15  15  0 \
 		2> $tempfile
 
 	if [ $? -eq 0 ]
@@ -124,10 +126,12 @@ function read_ip_info()
   			read -r IP
   			read -r MASK
   			read -r GATE
+  			read -r HOSTNAME
 
   			echo $IP > /etc/ethudp/IP
   			echo $MASK > /etc/ethudp/MASK
   			echo $GATE > /etc/ethudp/GATE
+  			echo $HOSTNAME > /etc/ethudp/HOSTNAME
 		}
 		rm -f $tempfile
 		read_master
@@ -135,6 +139,7 @@ function read_ip_info()
 }
 
 VPNNAME=$(cat /etc/ethudp/SITE/VPNNAME)
+HOSTNAME=$(cat /etc/ethudp/HOSTNAME)
 INDEX=$(cat /etc/ethudp/SITE/INDEX)
 BASEPORT=$(cat /etc/ethudp/SITE/BASEPORT)
 PORT=`expr $BASEPORT + $INDEX`
@@ -144,7 +149,7 @@ GATE=$(cat /etc/ethudp/GATE)
 MASTER=$(cat /etc/ethudp/MASTER)
 SLAVE=$(cat /etc/ethudp/SLAVE)
 
-dialog --title "Current Internet Interface Info" --ok-label "Change" --yesno "VPNNAME: $VPNNAME\nVPN Index: $INDEX\nUDP Port: $PORT\nIP: $IP\nMASK: $MASK\nGateway: $GATE\nMaster: $MASTER\nSlave: $SLAVE\nDo you want change?" 15 50
+dialog --title "Current Internet Interface Info" --ok-label "Change" --yesno "VPNNAME: $VPNNAME\nHOSTNAME: $HOSTNAME\nVPN Index: $INDEX\nUDP Port: $PORT\nIP: $IP\nMASK: $MASK\nGateway: $GATE\nMaster: $MASTER\nSlave: $SLAVE\nDo you want change?" 15 50
 
 if [ $? -eq 0 ] 
 then 

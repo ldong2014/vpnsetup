@@ -1,6 +1,7 @@
 #!/bin/bash
 
 VPNNAME=$(cat /etc/ethudp/SITE/VPNNAME)
+HOSTNAME=$(cat /etc/ethudp/HOSTNAME)
 INDEX=$(cat /etc/ethudp/SITE/INDEX)
 BASEPORT=$(cat /etc/ethudp/SITE/BASEPORT)
 PORT=`expr $BASEPORT + $INDEX`
@@ -11,6 +12,7 @@ MASTER=$(cat /etc/ethudp/MASTER)
 SLAVE=$(cat /etc/ethudp/SLAVE)
 PREFIX=$(cat /etc/ethudp/SITE/PREFIX)
 
+sed -i -e "s/HOSTNAME=.*$/HOSTNAME=$HOSTNAME/" /etc/sysconfig/network
 killall -9 EthUDP
 ip link set eth0 up
 ip link set eth1 up
