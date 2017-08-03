@@ -13,6 +13,8 @@ SLAVE=$(cat /etc/ethudp/SLAVE)
 PREFIX=$(cat /etc/ethudp/SITE/PREFIX)
 
 sed -i -e "s/HOSTNAME=.*$/HOSTNAME=$HOSTNAME/" /etc/sysconfig/network
+hostname $HOSTNAME
+
 killall -9 EthUDP
 ip link set eth0 up
 ip link set eth1 up

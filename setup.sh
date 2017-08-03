@@ -12,7 +12,7 @@ function active_config()
 	MASTER=$(cat /etc/ethudp/MASTER)
 	SLAVE=$(cat /etc/ethudp/SLAVE)
 
-	dialog --title "Current Internet Interface Info" --ok-label "Active" --yesno "VPNNAME: $VPNNAME\nVPN Index: $INDEX\nUDP Port: $PORT\nIP: $IP\nMASK: $MASK\nGateway: $GATE\nMaster: $MASTER\nSlave: $SLAVE\nDo you want active new config?" 15 50
+	dialog --title "Current VPN Config Info" --ok-label "Active" --yesno " VPN NAME: $VPNNAME\nVPN Index: $INDEX\n UDP Port: $PORT\n HOSTNAME: $HOSTNAME\n  IP Addr: $IP\n Net MASK: $MASK\n  Gateway: $GATE\n   Master: $MASTER\n    Slave: $SLAVE\nDo you want active new config?" 15 50
 	
 	if [ $? -eq 0 ] 
 	then 
@@ -114,10 +114,10 @@ function read_ip_info()
 {
 	tempfile=`tempfile 2>/dev/null` || tempfile=/tmp/test$$
 	dialog --ok-label "Next"  --title "Internet Interface Setup" --form "Please input the Internet Interface info:" 12 50 4  \
-  		"HOSTNAME:" 1  1 "$HOSTNAME" 1  15  15  0  \
-  		"IP:" 2  1 "$IP" 2  15  15  0  \
-  		"Mask:" 3  1 "$MASK" 3  15  15  0  \
-  		"Gateway:" 4  1 "$GATE" 4  15  15  0 \
+  		" HOSTNAME:" 1  1 "$HOSTNAME" 1  13  15  0  \
+  		"  IP Addr:" 2  1 "$IP" 2  13  15  0  \
+  		" Net Mask:" 3  1 "$MASK" 3  13  15  0  \
+  		"  Gateway:" 4  1 "$GATE" 4  13  15  0 \
 		2> $tempfile
 
 	if [ $? -eq 0 ]
@@ -149,7 +149,7 @@ GATE=$(cat /etc/ethudp/GATE)
 MASTER=$(cat /etc/ethudp/MASTER)
 SLAVE=$(cat /etc/ethudp/SLAVE)
 
-dialog --title "Current Internet Interface Info" --ok-label "Change" --yesno "VPNNAME: $VPNNAME\nHOSTNAME: $HOSTNAME\nVPN Index: $INDEX\nUDP Port: $PORT\nIP: $IP\nMASK: $MASK\nGateway: $GATE\nMaster: $MASTER\nSlave: $SLAVE\nDo you want change?" 15 50
+dialog --title "Current VPN Config Info" --ok-label "Change" --yesno " VPN NAME: $VPNNAME\nVPN Index: $INDEX\n UDP Port: $PORT\n HOSTNAME: $HOSTNAME\n  IP Addr: $IP\n Net MASK: $MASK\n  Gateway: $GATE\n   Master: $MASTER\n    Slave: $SLAVE\nDo you want change?" 15 50
 
 if [ $? -eq 0 ] 
 then 
