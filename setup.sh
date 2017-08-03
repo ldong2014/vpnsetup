@@ -123,10 +123,10 @@ function read_ip_info()
 	if [ $? -eq 0 ]
 	then
 		cat $tempfile | {
+  			read -r HOSTNAME
   			read -r IP
   			read -r MASK
   			read -r GATE
-  			read -r HOSTNAME
 
   			echo $IP > /etc/ethudp/IP
   			echo $MASK > /etc/ethudp/MASK
