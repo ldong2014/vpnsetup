@@ -102,6 +102,22 @@ void getstat(void) {
 	}
 	if(fp!=NULL) fclose(fp);
 /* end of vpnindex */
+/* SN */
+	fp= fopen("/etc/ethudp/SITE/SN","r");	
+	if((fp!=NULL) && (fgets(buf,MAXLEN,fp)!=NULL) ){
+		ret=snprintf(sendbuf+len,MAXLEN-len,"sn=%s",buf);
+		if(ret>0) len+=ret;
+	}
+	if(fp!=NULL) fclose(fp);
+/* end of SN */
+/* ZC */
+	fp= fopen("/etc/ethudp/SITE/ZC","r");	
+	if((fp!=NULL) && (fgets(buf,MAXLEN,fp)!=NULL) ){
+		ret=snprintf(sendbuf+len,MAXLEN-len,"zc=%s",buf);
+		if(ret>0) len+=ret;
+	}
+	if(fp!=NULL) fclose(fp);
+/* end of ZC */
 }
 
 
