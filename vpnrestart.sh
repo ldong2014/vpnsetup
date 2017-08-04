@@ -18,7 +18,7 @@ hostname $HOSTNAME
 killall -9 EthUDP
 killall -9 sendstat
 
-/usr/src/ethudp/sendstat
+/usr/src/vpnsetup/sendstat
 
 ip link set eth0 up
 ip link set eth1 up
