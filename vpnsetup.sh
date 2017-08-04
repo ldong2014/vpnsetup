@@ -16,7 +16,7 @@ function active_config()
 	
 	if [ $? -eq 0 ] 
 	then 
-		/usr/src/vpnsetup/restart.sh
+		/usr/src/vpnsetup/vpnrestart.sh
 	fi 
 }
 
