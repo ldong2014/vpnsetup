@@ -1,0 +1,38 @@
+#install ahernet vpn
+
+#install packages
+cd /etc/yum.repos.d
+mv CentOS-Base.repo  CentOS-Base.repo.save
+curl http://ctos.ustc.edu.cn/CentOS-Base.repo.6 > CentOS-Base.repo
+curl http://ctos.ustc.edu.cn/epel.repo.6 > epel.repo
+cd /etc/pki/rpm-gpg/
+curl http://ctos.ustc.edu.cn/epel/RPM-GPG-KEY-EPEL-6 > RPM-GPG-KEY-EPEL
+yum update
+yum install -y gcc git lz4-devel openssl-devel dialog
+
+#change network setting
+sed -i -e "s/dhcp/static/" /etc/sysconfig/network-scripts/ifcfg-eth0
+
+#install ethudp
+cd /usr/src
+git clone https://github.com/bg6cq/ethudp.git
+cd ethudp
+make
+
+#instal vpnsetup
+cd /usr/src
+git clone https://github.com/bg6cq/vpnsetup.git
+ln -s /usr/src/vpnsetup/ethudp /etc/
+grep vpnrestart.sh /etc/rc.local
+if [ $? -eq 0 ];
+then
+	echo vpnrestart added to rc.local
+else
+	echo "# start ethudp vpn" >> /etc/rc.local
+	echo /usr/src/vpnsetup/vpnrestart.sh >> /etc/rc.local
+fi
+
+cd /usr/src/vpnsetup
+ln -s /usr/src/vpnsetup/vpnsetup.sh /bin/vpnsetup
+
+git checkout -b 
