@@ -16,6 +16,8 @@ sed -i -e "s/HOSTNAME=.*$/HOSTNAME=$HOSTNAME/" /etc/sysconfig/network
 hostname $HOSTNAME
 
 killall -9 EthUDP
+killall -9 sendstat
+
 ip link set eth0 up
 ip link set eth1 up
 ip add flush dev eth0

@@ -12,7 +12,7 @@ function active_config()
 	MASTER=$(cat /etc/ethudp/MASTER)
 	SLAVE=$(cat /etc/ethudp/SLAVE)
 
-	dialog --title "Current VPN Config Info" --ok-label "Active" --yesno " VPN NAME: $VPNNAME\nVPN Index: $INDEX\n UDP Port: $PORT\n HOSTNAME: $HOSTNAME\n  IP Addr: $IP\n Net MASK: $MASK\n  Gateway: $GATE\n   Master: $MASTER\n    Slave: $SLAVE\nDo you want active new config?" 15 50
+	dialog --backtitle "VPN Information" --title "Current VPN Config Info" --ok-label "Active" --yesno " VPN NAME: $VPNNAME\nVPN Index: $INDEX\n UDP Port: $PORT\n HOSTNAME: $HOSTNAME\n  IP Addr: $IP\n Net MASK: $MASK\n  Gateway: $GATE\n   Master: $MASTER\n    Slave: $SLAVE\nDo you want active new config?" 15 50
 	
 	if [ $? -eq 0 ] 
 	then 
@@ -30,7 +30,7 @@ function read_slave()
 	fi
 	if [ $SLAVE = "NONE" ]
 	then 
-	dialog --ok-label "Next"  --title "SLave Connections" --radiolist "Please select your slave connection info:" 12 50 4  \
+	dialog --backtitle "VPN Information" --ok-label "Next"  --title "SLave Connections" --radiolist "Please select your slave connection info:" 12 50 4  \
 		"NONE" "NO SLAVE connect" on \
 		"CT" "China Telcom" off \
 		"CU" "China Unicom" off \
@@ -38,7 +38,7 @@ function read_slave()
 		2> $tempfile
 	elif [ $SLAVE = "CT" ]
 	then 
-	dialog --ok-label "Next"  --title "SLave Connections" --radiolist "Please select your slave connection info:" 12 50 4  \
+	dialog --backtitle "VPN Information" --ok-label "Next"  --title "SLave Connections" --radiolist "Please select your slave connection info:" 12 50 4  \
 		"NONE" "NO SLAVE connect" off \
 		"CT" "China Telcom" on \
 		"CU" "China Unicom" off \
@@ -46,7 +46,7 @@ function read_slave()
 		2> $tempfile
 	elif [ $SLAVE = "CU" ]
 	then 
-	dialog --ok-label "Next"  --title "SLave Connections" --radiolist "Please select your slave connection info:" 12 50 4  \
+	dialog --backtitle "VPN Information" --ok-label "Next"  --title "SLave Connections" --radiolist "Please select your slave connection info:" 12 50 4  \
 		"NONE" "NO SLAVE connect" off \
 		"CT" "China Telcom" off \
 		"CU" "China Unicom" on \
@@ -54,7 +54,7 @@ function read_slave()
 		2> $tempfile
 	elif [ $SLAVE = "CMCC" ]
 	then 
-	dialog --ok-label "Next"  --title "SLave Connections" --radiolist "Please select your slave connection info:" 12 50 4  \
+	dialog --backtitle "VPN Information" --ok-label "Next"  --title "SLave Connections" --radiolist "Please select your slave connection info:" 12 50 4  \
 		"NONE" "NO SLAVE connect" off \
 		"CT" "China Telcom" off \
 		"CU" "China Unicom" off \
@@ -80,21 +80,21 @@ function read_master()
 
 	if [ $MASTER = "CT" ]
 	then 
-	dialog --ok-label "Next"  --title "Master Connections" --radiolist "Please select your master connection info:" 12 50 3  \
+	dialog --backtitle "VPN Information" --ok-label "Next"  --title "Master Connections" --radiolist "Please select your master connection info:" 12 50 3  \
 		"CT" "China Telcom" on \
 		"CU" "China Unicom" off \
 		"CMCC" "China Moblie" off \
 		2> $tempfile
 	elif [ $MASTER = "CU" ]
 	then 
-	dialog --ok-label "Next"  --title "Master Connections" --radiolist "Please select your master connection info:" 12 50 3  \
+	dialog --backtitle "VPN Information" --ok-label "Next"  --title "Master Connections" --radiolist "Please select your master connection info:" 12 50 3  \
 		"CT" "China Telcom" off \
 		"CU" "China Unicom" on \
 		"CMCC" "China Moblie" off \
 		2> $tempfile
 	elif [ $MASTER = "CMCC" ]
 	then 
-	dialog --ok-label "Next"  --title "Master Connections" --radiolist "Please select your master connection info:" 12 50 3  \
+	dialog --backtitle "VPN Information" --ok-label "Next"  --title "Master Connections" --radiolist "Please select your master connection info:" 12 50 3  \
 		"CT" "China Telcom" off \
 		"CU" "China Unicom" off \
 		"CMCC" "China Moblie" on \
@@ -113,7 +113,7 @@ function read_master()
 function read_ip_info()
 {
 	tempfile=`tempfile 2>/dev/null` || tempfile=/tmp/test$$
-	dialog --ok-label "Next"  --title "Internet Interface Setup" --form "Please input the Internet Interface info:" 12 50 4  \
+	dialog --backtitle "VPN Information" --ok-label "Next"  --title "Internet Interface Setup" --form "Please input the Internet Interface info:" 12 50 4  \
   		" HOSTNAME:" 1  1 "$HOSTNAME" 1  13  15  0  \
   		"  IP Addr:" 2  1 "$IP" 2  13  15  0  \
   		" Net Mask:" 3  1 "$MASK" 3  13  15  0  \
@@ -149,7 +149,7 @@ GATE=$(cat /etc/ethudp/GATE)
 MASTER=$(cat /etc/ethudp/MASTER)
 SLAVE=$(cat /etc/ethudp/SLAVE)
 
-dialog --title "Current VPN Config Info" --ok-label "Change" --yesno " VPN NAME: $VPNNAME\nVPN Index: $INDEX\n UDP Port: $PORT\n HOSTNAME: $HOSTNAME\n  IP Addr: $IP\n Net MASK: $MASK\n  Gateway: $GATE\n   Master: $MASTER\n    Slave: $SLAVE\nDo you want change?" 15 50
+dialog --backtitle "VPN Information" --title "Current VPN Config Info" --ok-label "Change" --yesno " VPN NAME: $VPNNAME\nVPN Index: $INDEX\n UDP Port: $PORT\n HOSTNAME: $HOSTNAME\n  IP Addr: $IP\n Net MASK: $MASK\n  Gateway: $GATE\n   Master: $MASTER\n    Slave: $SLAVE\nDo you want change?" 15 50
 
 if [ $? -eq 0 ] 
 then 
