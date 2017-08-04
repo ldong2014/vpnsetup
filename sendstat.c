@@ -94,6 +94,14 @@ void getstat(void) {
 	} 
 	if(fp!=NULL) fclose(fp);
 /* end uptime */
+/* vpnindex */
+	fp= fopen("/etc/ethudp/SITE/INDEX","r");	
+	if((fp!=NULL) && (fgets(buf,MAXLEN,fp)!=NULL) ){
+		ret=snprintf(sendbuf+len,MAXLEN-len,"index=%s",buf);
+		if(ret>0) len+=ret;
+	}
+	if(fp!=NULL) fclose(fp);
+/* end of vpnindex */
 }
 
 
