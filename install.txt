@@ -22,6 +22,8 @@ make
 #instal vpnsetup
 cd /usr/src
 git clone https://github.com/bg6cq/vpnsetup.git
+cd /usr/src/vpnsetup
+make
 ln -s /usr/src/vpnsetup/ethudp /etc/
 grep vpnrestart.sh /etc/rc.local
 if [ $? -eq 0 ];
@@ -30,9 +32,9 @@ then
 else
 	echo "# start ethudp vpn" >> /etc/rc.local
 	echo /usr/src/vpnsetup/vpnrestart.sh >> /etc/rc.local
+	echo /usr/src/vpnsetup/sendstat >> /etc/rc.local
 fi
 
-cd /usr/src/vpnsetup
 ln -s /usr/src/vpnsetup/vpnsetup.sh /bin/vpnsetup
 
 git checkout -b 
