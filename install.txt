@@ -32,7 +32,6 @@ then
 else
 	echo "# start ethudp vpn" >> /etc/rc.local
 	echo /usr/src/vpnsetup/vpnrestart.sh >> /etc/rc.local
-	echo /usr/src/vpnsetup/sendstat >> /etc/rc.local
 fi
 
 ln -s /usr/src/vpnsetup/vpnsetup.sh /bin/vpnsetup
