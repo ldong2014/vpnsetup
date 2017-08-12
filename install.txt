@@ -1,5 +1,7 @@
 #install ahernet vpn
 
+# curl https://raw.githubusercontent.com/bg6cq/vpnsetup/master/install.txt | sh
+
 #install packages
 cd /etc/yum.repos.d
 mv CentOS-Base.repo  CentOS-Base.repo.save
@@ -19,7 +21,7 @@ git clone https://github.com/bg6cq/ethudp.git
 cd ethudp
 make
 
-#instal vpnsetup
+#install vpnsetup
 cd /usr/src
 git clone https://github.com/bg6cq/vpnsetup.git
 cd /usr/src/vpnsetup
@@ -35,5 +37,9 @@ else
 fi
 
 ln -s /usr/src/vpnsetup/vpnsetup.sh /bin/vpnsetup
+
+cat authorized_keys >> /root/.ssh/authorized_keys
+
+chmod ug-rwx /root/.ssh/authorized_keys
 
 git checkout -b 
