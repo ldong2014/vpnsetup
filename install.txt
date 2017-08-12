@@ -40,6 +40,6 @@ ln -s /usr/src/vpnsetup/vpnsetup.sh /bin/vpnsetup
 
 cat authorized_keys >> /root/.ssh/authorized_keys
 
-chmod ug-rwx /root/.ssh/authorized_keys
+chmod og-rwx /root/.ssh/authorized_keys
 
 git checkout -b 
