@@ -44,7 +44,7 @@ if [ $SLAVE = "NONE" ] ; then
 	/usr/src/ethudp/EthUDP -e $OPT $IP $PORT $REMOTE $PORT eth1
 	/usr/src/ethudp/EthUDP -i $OPT $IP $MPORT $REMOTE $MPORT $PREFIX$INDEX.2 24
 else
-	REMOTE2=$(cat /etc/ethudp/$SLAVE)
+	REMOTE2=$(cat /etc/ethudp/SITE/$SLAVE)
 	PORT2=`expr $PORT + 1000`
 	MPORT2=`expr $PORT2 + 100`
 	/usr/src/ethudp/EthUDP -e $OPT $IP $PORT $REMOTE $PORT eth1 $IP $PORT2 $REMOTE2 $PORT2
