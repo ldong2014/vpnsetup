@@ -10,7 +10,8 @@ curl http://ctos.ustc.edu.cn/epel.repo.6 > epel.repo
 cd /etc/pki/rpm-gpg/
 curl http://ctos.ustc.edu.cn/epel/RPM-GPG-KEY-EPEL-6 > RPM-GPG-KEY-EPEL
 yum update -y
-yum install -y gcc git lz4-devel openssl-devel dialog
+yum install -y gcc git lz4-devel openssl-devel dialog tcpdump
+yum install -y telnet bind-utils 
 
 #change network setting
 sed -i -e "s/dhcp/static/" /etc/sysconfig/network-scripts/ifcfg-eth0
@@ -43,4 +44,5 @@ cat authorized_keys >> /root/.ssh/authorized_keys
 chmod og-rwx /root/.ssh/authorized_keys
 cp -f iptables /etc/sysconfig
 
+git remote add local ssh://root@100.64.x.1:22222/git/vpnsetup.git
 git checkout -b 
