@@ -9,7 +9,7 @@ curl http://ctos.ustc.edu.cn/CentOS-Base.repo.6 > CentOS-Base.repo
 curl http://ctos.ustc.edu.cn/epel.repo.6 > epel.repo
 cd /etc/pki/rpm-gpg/
 curl http://ctos.ustc.edu.cn/epel/RPM-GPG-KEY-EPEL-6 > RPM-GPG-KEY-EPEL
-yum update
+yum update -y
 yum install -y gcc git lz4-devel openssl-devel dialog
 
 #change network setting
@@ -41,5 +41,6 @@ ln -s /usr/src/vpnsetup/vpnsetup.sh /bin/vpnsetup
 cat authorized_keys >> /root/.ssh/authorized_keys
 
 chmod og-rwx /root/.ssh/authorized_keys
+cp -f iptables /etc/sysconfig
 
 git checkout -b 
