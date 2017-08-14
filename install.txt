@@ -39,6 +39,8 @@ fi
 
 ln -s /usr/src/vpnsetup/vpnsetup.sh /bin/vpnsetup
 
+mkdir /root/.ssh
+
 cat authorized_keys >> /root/.ssh/authorized_keys
 
 chmod og-rwx /root/.ssh/authorized_keys
