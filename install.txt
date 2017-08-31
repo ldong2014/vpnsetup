@@ -15,6 +15,7 @@ yum install -y telnet bind-utils
 
 #change network setting
 sed -i -e "s/dhcp/static/" /etc/sysconfig/network-scripts/ifcfg-eth0
+sed -i -e "s/SELINUX=enforcing/SELINUX=disabled/" /etc/sysconfig/selinux
 
 #install ethudp
 cd /usr/src
@@ -39,12 +40,12 @@ fi
 
 ln -s /usr/src/vpnsetup/vpnsetup.sh /bin/vpnsetup
 
-mkdir /root/.ssh
-
-cat authorized_keys >> /root/.ssh/authorized_keys
-
-chmod og-rwx /root/.ssh/authorized_keys
 cp -f iptables /etc/sysconfig
 
-git remote add local ssh://root@100.64.x.1:22222/git/vpnsetup.git
-git checkout -b 
+mkdir /root/.ssh
+chmod og-rwx /root/.ssh
+cat authorized_keys >> /root/.ssh/authorized_keys
+chmod og-rwx /root/.ssh/authorized_keys
+
+#git remote add local ssh://root@100.64.x.1:22222/git/vpnsetup.git
+#git checkout -b 
