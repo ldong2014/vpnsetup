@@ -11,7 +11,9 @@ cd /etc/pki/rpm-gpg/
 curl http://ctos.ustc.edu.cn/epel/RPM-GPG-KEY-EPEL-6 > RPM-GPG-KEY-EPEL
 yum update -y
 yum install -y gcc git lz4-devel openssl-devel dialog tcpdump
-yum install -y telnet bind-utils 
+yum install -y telnet bind-utils traceroute gd-devel httpd
+
+chkconfig httpd on
 
 #change network setting
 sed -i -e "s/dhcp/static/" /etc/sysconfig/network-scripts/ifcfg-eth0
@@ -35,11 +37,19 @@ then
 else
 	echo "# start ethudp vpn" >> /etc/rc.local
 	echo /usr/src/vpnsetup/vpnrestart.sh >> /etc/rc.local
+	echo "/usr/src/traffic/iftrafficd &" >> /etc/rc.local
+	echo "setenforce 0" >> /etc/rc.local
 fi
+
 
 ln -s /usr/src/vpnsetup/vpnsetup.sh /bin/vpnsetup
 
 /bin/cp -f iptables /etc/sysconfig
+
+cd /usr/src
+git clone https://github.com/bg6cq/traffic.git
+cd /usr/src/traffic
+make
 
 mkdir /root/.ssh
 chmod og-rwx /root/.ssh
