@@ -26,6 +26,8 @@ ip add flush dev eth0
 ip add add $IP/$MASK dev eth0
 ip route add 0/0 via $GATE
 
+ethtool -K eth1 gro off
+
 OPT=$(cat /etc/ethudp/SITE/OPT)
 
 if [ -z $MASTER ] ; then
