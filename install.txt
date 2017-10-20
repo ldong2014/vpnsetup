@@ -46,16 +46,16 @@ ln -s /usr/src/vpnsetup/vpnsetup.sh /bin/vpnsetup
 
 /bin/cp -f iptables /etc/sysconfig
 
-cd /usr/src
-git clone https://github.com/bg6cq/traffic.git
-cd /usr/src/traffic
-make
-
 mkdir /root/.ssh
 chmod og-rwx /root/.ssh
 cat authorized_keys >> /root/.ssh/authorized_keys
 chmod og-rwx /root/.ssh/authorized_keys
 /sbin/restorecon -r /root/.ssh
+
+cd /usr/src
+git clone https://github.com/bg6cq/traffic.git
+cd /usr/src/traffic
+make
 
 git remote add local ssh://root@202.141.160.125:22222/git/vpnsetup.git
 #git checkout -b 
