@@ -10,7 +10,7 @@ curl http://ctos.ustc.edu.cn/epel.repo.6 > epel.repo
 cd /etc/pki/rpm-gpg/
 curl http://ctos.ustc.edu.cn/epel/RPM-GPG-KEY-EPEL-6 > RPM-GPG-KEY-EPEL
 yum update -y
-yum install -y gcc git lz4-devel openssl-devel dialog tcpdump
+yum install -y gcc git lz4-devel openssl-devel dialog tcpdump ntpdate
 yum install -y telnet bind-utils traceroute gd-devel httpd
 
 chkconfig httpd on
