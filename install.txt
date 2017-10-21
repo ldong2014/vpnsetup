@@ -56,6 +56,7 @@ cd /usr/src
 git clone https://github.com/bg6cq/traffic.git
 cd /usr/src/traffic
 make
+cp traffic.html /var/www/html/index.html
 
 git remote add local ssh://root@202.141.160.125:22222/git/vpnsetup.git
 #git checkout -b 
