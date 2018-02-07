@@ -23,7 +23,7 @@
 char sendbuf[MAXLEN];
 unsigned long int ip;
 unsigned int port;
-
+time_t starttime;
 
 unsigned long int my_aton(char *str)
 {       int n1,n2,n3,n4;
@@ -81,7 +81,10 @@ void getstat(void) {
 		if(ret>0) len+=ret;
 	}
 	if(fp!=NULL) fclose(fp);
-/* end of hostname */
+
+/* starttime */
+	ret=snprintf(sendbuf+len,MAXLEN-len,"starttime=%ld\n",starttime);
+        if(ret>0) len+=ret;
 
 /* uptime */
 	fp= fopen("/proc/uptime","r");	
@@ -93,7 +96,7 @@ void getstat(void) {
 		};
 	} 
 	if(fp!=NULL) fclose(fp);
-/* end uptime */
+
 /* vpnindex */
 	fp= fopen("/etc/ethudp/SITE/INDEX","r");	
 	if((fp!=NULL) && (fgets(buf,MAXLEN,fp)!=NULL) ){
@@ -101,7 +104,7 @@ void getstat(void) {
 		if(ret>0) len+=ret;
 	}
 	if(fp!=NULL) fclose(fp);
-/* end of vpnindex */
+
 /* SN */
 	fp= fopen("/etc/ethudp/SITE/SN","r");	
 	if((fp!=NULL) && (fgets(buf,MAXLEN,fp)!=NULL) ){
@@ -109,7 +112,7 @@ void getstat(void) {
 		if(ret>0) len+=ret;
 	}
 	if(fp!=NULL) fclose(fp);
-/* end of SN */
+
 /* ZC */
 	fp= fopen("/etc/ethudp/SITE/ZC","r");	
 	if((fp!=NULL) && (fgets(buf,MAXLEN,fp)!=NULL) ){
@@ -117,7 +120,6 @@ void getstat(void) {
 		if(ret>0) len+=ret;
 	}
 	if(fp!=NULL) fclose(fp);
-/* end of ZC */
 }
 
 
@@ -144,6 +146,7 @@ int main(int argc,char*argv[])
 	setsid();
 	signal(SIGCHLD,SIG_IGN);
 	ip = my_aton("202.38.64.40");
+	starttime=time(NULL);
 	port = 6021;
 
 	if(argc>=2) 
