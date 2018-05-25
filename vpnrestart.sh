@@ -26,6 +26,10 @@ ip add flush dev eth0
 ip add add $IP/$MASK dev eth0
 ip route add 0/0 via $GATE
 
+ip add flush dev eth3
+ip add add 100.64.0.1/24 dev eth3
+ip link set eth3 up
+
 ethtool -K eth1 gro off
 
 OPT=$(cat /etc/ethudp/SITE/OPT)
