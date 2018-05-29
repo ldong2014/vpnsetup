@@ -11,6 +11,7 @@ GATE=$(cat /etc/ethudp/GATE)
 MASTER=$(cat /etc/ethudp/MASTER)
 SLAVE=$(cat /etc/ethudp/SLAVE)
 PREFIX=$(cat /etc/ethudp/SITE/PREFIX)
+IPV6=$(cat /etc/ethudp/IPV6)
 
 sed -i -e "s/HOSTNAME=.*$/HOSTNAME=$HOSTNAME/" /etc/sysconfig/network
 hostname $HOSTNAME
@@ -46,14 +47,31 @@ if [ -z $SLAVE ]; then
 	SLAVE="NONE"
 fi
 
+if [ -z $IPV6 ]; then
+	IPV6="NO"
+fi
+
+if [ $IPV6 == "YES" ]; then
+	ip link set eth2 up
+	ethtool -K eth2 gro off
+fi
+
 if [ $SLAVE = "NONE" ] ; then
 	/usr/src/ethudp/EthUDP -e $OPT $IP $PORT $REMOTE $PORT eth1
 	/usr/src/ethudp/EthUDP -i $OPT $IP $MPORT $REMOTE $MPORT $PREFIX$INDEX.2 24
+	if [ $IPV6 = "YES" ]; then
+		PORT=`expr $PORT + 500`
+		/usr/src/ethudp/EthUDP -e $OPT $IP $PORT $REMOTE $PORT eth2
+	fi
 else
 	REMOTE2=$(cat /etc/ethudp/SITE/$SLAVE)
 	PORT2=`expr $PORT + 1000`
 	MPORT2=`expr $PORT2 + 100`
 	/usr/src/ethudp/EthUDP -e $OPT $IP $PORT $REMOTE $PORT eth1 $IP $PORT2 $REMOTE2 $PORT2
 	/usr/src/ethudp/EthUDP -i $OPT $IP $MPORT $REMOTE $MPORT $PREFIX$INDEX.2 24 $IP $MPORT2 $REMOTE2 $MPORT2
+	if [ $IPV6 = "YES" ]; then
+		PORT=`expr $PORT + 500`
+		PORT2=`expr $PORT + 1000`
+		/usr/src/ethudp/EthUDP -e $OPT $IP $PORT $REMOTE $PORT eth2 $IP $PORT2 $REMOTE2 $PORT2
+	fi
 fi
-

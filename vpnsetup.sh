@@ -11,13 +11,44 @@ function active_config()
 	GATE=$(cat /etc/ethudp/GATE)
 	MASTER=$(cat /etc/ethudp/MASTER)
 	SLAVE=$(cat /etc/ethudp/SLAVE)
+	IPV6=$(cat /etc/ethudp/IPV6)
 
-	dialog --backtitle "VPN Information" --title "Current VPN Config Info" --ok-label "Active" --yesno " VPN NAME: $VPNNAME\nVPN Index: $INDEX\n UDP Port: $PORT\n HOSTNAME: $HOSTNAME\n  IP Addr: $IP\n Net MASK: $MASK\n  Gateway: $GATE\n   Master: $MASTER\n    Slave: $SLAVE\nDo you want active new config?" 15 50
+	dialog --backtitle "VPN Information" --title "Current VPN Config Info" --ok-label "Active" --yesno " VPN NAME: $VPNNAME\nVPN Index: $INDEX\n UDP Port: $PORT\n HOSTNAME: $HOSTNAME\n  IP Addr: $IP\n Net MASK: $MASK\n  Gateway: $GATE\n   Master: $MASTER\n    Slave: $SLAVE\neth2 IPv6: $IPV6\nDo you want active new config?" 15 50
 	
 	if [ $? -eq 0 ] 
 	then 
 		/usr/src/vpnsetup/vpnrestart.sh
 	fi 
+}
+
+function read_ipv6()
+{
+	tempfile=`tempfile 2>/dev/null` || tempfile=/tmp/test$$
+	
+	if [ -z $IPV6 ]
+	then
+		IPV6=NO
+	fi
+
+	if [ $IPV6 = "NO" ]
+	then 
+	dialog --backtitle "VPN Information" --ok-label "Next"  --title "eth2 for IPv6 Connections" --radiolist "Do you need eth2 for IPv6 interface:" 12 50 4  \
+		"NO" "NO" on \
+		"YES" "YES, eth2 for IPv6" off \
+		2> $tempfile
+	else
+	dialog --backtitle "VPN Information" --ok-label "Next"  --title "eth2 for IPv6 Connections" --radiolist "Do you need eth2 for IPv6 interface:" 12 50 4  \
+		"NO" "NO" off \
+		"YES" "YES, eth2 for IPv6" on \
+		2> $tempfile
+	fi
+
+	if [ $? -eq 0 ]
+	then
+		cat $tempfile > /etc/ethudp/IPV6
+		rm -f $tempfile
+		active_config
+	fi
 }
 
 function read_slave()
@@ -28,6 +59,7 @@ function read_slave()
 	then
 		SLAVE=NONE
 	fi
+
 	if [ $SLAVE = "NONE" ]
 	then 
 	dialog --backtitle "VPN Information" --ok-label "Next"  --title "SLave Connections" --radiolist "Please select your slave connection info:" 12 50 4  \
@@ -61,11 +93,12 @@ function read_slave()
 		"CMCC" "China Moblie" on \
 		2> $tempfile
 	fi
+
 	if [ $? -eq 0 ]
 	then
 		cat $tempfile > /etc/ethudp/SLAVE
 		rm -f $tempfile
-		active_config
+		read_ipv6
 	fi
 }
 
@@ -100,7 +133,6 @@ function read_master()
 		"CMCC" "China Moblie" on \
 		2> $tempfile
 	fi
-
 
 	if [ $? -eq 0 ]
 	then
@@ -148,8 +180,9 @@ MASK=$(cat /etc/ethudp/MASK)
 GATE=$(cat /etc/ethudp/GATE)
 MASTER=$(cat /etc/ethudp/MASTER)
 SLAVE=$(cat /etc/ethudp/SLAVE)
+IPV6=$(cat /etc/ethudp/IPV6)
 
-dialog --backtitle "VPN Information" --title "Current VPN Config Info" --ok-label "Change" --yesno " VPN NAME: $VPNNAME\nVPN Index: $INDEX\n UDP Port: $PORT\n HOSTNAME: $HOSTNAME\n  IP Addr: $IP\n Net MASK: $MASK\n  Gateway: $GATE\n   Master: $MASTER\n    Slave: $SLAVE\nDo you want change?" 15 50
+dialog --backtitle "VPN Information" --title "Current VPN Config Info" --ok-label "Change" --yesno " VPN NAME: $VPNNAME\nVPN Index: $INDEX\n UDP Port: $PORT\n HOSTNAME: $HOSTNAME\n  IP Addr: $IP\n Net MASK: $MASK\n  Gateway: $GATE\n   Master: $MASTER\n    Slave: $SLAVE\neth2 IPv6: $IPV6\nDo you want change?" 15 50
 
 if [ $? -eq 0 ] 
 then 
