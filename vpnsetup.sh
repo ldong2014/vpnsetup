@@ -61,36 +61,49 @@ function read_slave()
 	fi
 
 	if [ $SLAVE = "NONE" ]
-	then 
-	dialog --backtitle "VPN Information" --ok-label "Next"  --title "SLave Connections" --radiolist "Please select your slave connection info:" 12 50 4  \
+	then
+	dialog --backtitle "VPN Information" --ok-label "Next"  --title "SLave Connections" --radiolist "Please select your slave connection info:" 12 50 5  \
 		"NONE" "NO SLAVE connect" on \
 		"CT" "China Telcom" off \
 		"CU" "China Unicom" off \
 		"CMCC" "China Moblie" off \
+		"CT2" "China Telcom" off \
 		2> $tempfile
 	elif [ $SLAVE = "CT" ]
-	then 
-	dialog --backtitle "VPN Information" --ok-label "Next"  --title "SLave Connections" --radiolist "Please select your slave connection info:" 12 50 4  \
+	then
+	dialog --backtitle "VPN Information" --ok-label "Next"  --title "SLave Connections" --radiolist "Please select your slave connection info:" 12 50 5  \
 		"NONE" "NO SLAVE connect" off \
 		"CT" "China Telcom" on \
 		"CU" "China Unicom" off \
 		"CMCC" "China Moblie" off \
+		"CT2" "China Telcom" off \
 		2> $tempfile
 	elif [ $SLAVE = "CU" ]
-	then 
-	dialog --backtitle "VPN Information" --ok-label "Next"  --title "SLave Connections" --radiolist "Please select your slave connection info:" 12 50 4  \
+	then
+	dialog --backtitle "VPN Information" --ok-label "Next"  --title "SLave Connections" --radiolist "Please select your slave connection info:" 12 50 5  \
 		"NONE" "NO SLAVE connect" off \
 		"CT" "China Telcom" off \
 		"CU" "China Unicom" on \
 		"CMCC" "China Moblie" off \
+		"CT2" "China Telcom" off \
 		2> $tempfile
 	elif [ $SLAVE = "CMCC" ]
-	then 
-	dialog --backtitle "VPN Information" --ok-label "Next"  --title "SLave Connections" --radiolist "Please select your slave connection info:" 12 50 4  \
+	then
+	dialog --backtitle "VPN Information" --ok-label "Next"  --title "SLave Connections" --radiolist "Please select your slave connection info:" 12 50 5  \
 		"NONE" "NO SLAVE connect" off \
 		"CT" "China Telcom" off \
 		"CU" "China Unicom" off \
 		"CMCC" "China Moblie" on \
+		"CT2" "China Telcom" off \
+		2> $tempfile
+	elif [ $SLAVE = "CT2" ]
+	then
+	dialog --backtitle "VPN Information" --ok-label "Next"  --title "SLave Connections" --radiolist "Please select your slave connection info:" 12 50 5  \
+		"NONE" "NO SLAVE connect" off \
+		"CT" "China Telcom" off \
+		"CU" "China Unicom" off \
+		"CMCC" "China Moblie" off \
+		"CT2" "China Telcom" on \
 		2> $tempfile
 	fi
 
@@ -113,24 +126,35 @@ function read_master()
 
 	if [ $MASTER = "CT" ]
 	then 
-	dialog --backtitle "VPN Information" --ok-label "Next"  --title "Master Connections" --radiolist "Please select your master connection info:" 12 50 3  \
+	dialog --backtitle "VPN Information" --ok-label "Next"  --title "Master Connections" --radiolist "Please select your master connection info:" 12 50 4  \
 		"CT" "China Telcom" on \
 		"CU" "China Unicom" off \
 		"CMCC" "China Moblie" off \
+		"CT2" "China Telcom" off \
 		2> $tempfile
 	elif [ $MASTER = "CU" ]
-	then 
-	dialog --backtitle "VPN Information" --ok-label "Next"  --title "Master Connections" --radiolist "Please select your master connection info:" 12 50 3  \
+	then
+	dialog --backtitle "VPN Information" --ok-label "Next"  --title "Master Connections" --radiolist "Please select your master connection info:" 12 50 4  \
 		"CT" "China Telcom" off \
 		"CU" "China Unicom" on \
 		"CMCC" "China Moblie" off \
+		"CT2" "China Telcom" off \
 		2> $tempfile
 	elif [ $MASTER = "CMCC" ]
-	then 
-	dialog --backtitle "VPN Information" --ok-label "Next"  --title "Master Connections" --radiolist "Please select your master connection info:" 12 50 3  \
+	then
+	dialog --backtitle "VPN Information" --ok-label "Next"  --title "Master Connections" --radiolist "Please select your master connection info:" 12 50 4  \
 		"CT" "China Telcom" off \
 		"CU" "China Unicom" off \
 		"CMCC" "China Moblie" on \
+		"CT2" "China Telcom" off \
+		2> $tempfile
+	elif [ $MASTER = "CT2" ]
+	then
+	dialog --backtitle "VPN Information" --ok-label "Next"  --title "Master Connections" --radiolist "Please select your master connection info:" 12 50 4  \
+		"CT" "China Telcom" off \
+		"CU" "China Unicom" off \
+		"CMCC" "China Moblie" off \
+		"CT2" "China Telcom" on \
 		2> $tempfile
 	fi
 
