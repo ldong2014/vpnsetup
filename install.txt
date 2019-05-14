@@ -20,13 +20,13 @@ sed -i -e "s/dhcp/static/" /etc/sysconfig/network-scripts/ifcfg-eth0
 
 #install ethudp
 cd /usr/src
-git clone https://github.com/bg6cq/ethudp.git
+git clone https://github.com/ldong2014/ethudp.git
 cd ethudp
 make
 
 #install vpnsetup
 cd /usr/src
-git clone https://github.com/bg6cq/vpnsetup.git
+git clone https://github.com/ldong2014/vpnsetup.git
 cd /usr/src/vpnsetup
 make
 ln -s /usr/src/vpnsetup/ethudp /etc/
@@ -54,12 +54,12 @@ chmod og-rwx /root/.ssh/authorized_keys
 /sbin/restorecon -r /root/.ssh
 
 cd /usr/src
-git clone https://github.com/bg6cq/traffic.git
+git clone https://github.com/ldong2014/traffic.git
 cd /usr/src/traffic
 make
 cp traffic.html /var/www/html/index.html
 
 cd /usr/src/vpnsetup
 
-git remote add local ssh://root@202.141.160.125:22222/git/vpnsetup.git
+#git remote add local ssh://root@202.141.160.125:22222/git/vpnsetup.git
 #git checkout -b 
