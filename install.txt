@@ -1,4 +1,5 @@
 #install ahernet vpn
+# this is an old version of install file
 
 # curl https://raw.githubusercontent.com/bg6cq/vpnsetup/master/install.txt | sh
 
