@@ -11,8 +11,8 @@
 
         if [ $? -eq 0 ]
         then
-#               /usr/src/vpnsetup/vpnrestart.sh
-                echo "service restart!"
+               /usr/src/vpnsetup/vpnrestart_dhcp.sh
+               echo "service restart!"
 
 
 
